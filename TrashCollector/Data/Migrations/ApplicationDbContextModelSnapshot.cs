@@ -48,17 +48,10 @@ namespace TrashCollector.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "5e9b87c8-6a9d-435f-951b-c974bc5ef34f",
-                            ConcurrencyStamp = "494b2b40-0884-42f7-a7bd-8bd71ea5748f",
+                            Id = "023a59db-beee-4326-bb34-faf038f538d5",
+                            ConcurrencyStamp = "b7116582-e8dd-4a10-bb86-42bac8284815",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
-                        },
-                        new
-                        {
-                            Id = "c76277e8-2ff7-4e71-93b4-1089ec6a2b46",
-                            ConcurrencyStamp = "1d5ea192-37f4-4aae-b87c-4e8967933cd1",
-                            Name = "Customer",
-                            NormalizedName = "CUSTOMER"
                         });
                 });
 
@@ -231,62 +224,6 @@ namespace TrashCollector.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("TrashCollector.Models.Customer", b =>
-                {
-                    b.Property<int>("PrimaryKey")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<double>("AmountOwed")
-                        .HasColumnType("float");
-
-                    b.Property<DateTime>("EndOfCycle")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("ExtraPickUpUsed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IdentityUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("PickUpDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("StartOfCycle")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("PrimaryKey");
-
-                    b.HasIndex("IdentityUserId");
-
-                    b.ToTable("Customer");
-                });
-
-            modelBuilder.Entity("TrashCollector.Models.Sample", b =>
-                {
-                    b.Property<int>("PrimaryKey")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("PrimaryKey");
-
-                    b.ToTable("Sample");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -336,13 +273,6 @@ namespace TrashCollector.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("TrashCollector.Models.Customer", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
-                        .WithMany()
-                        .HasForeignKey("IdentityUserId");
                 });
 #pragma warning restore 612, 618
         }

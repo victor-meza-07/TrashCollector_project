@@ -4,7 +4,6 @@ using System.Text;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using TrashCollector.Models;
 
 namespace TrashCollector.Data
 {
@@ -18,6 +17,7 @@ namespace TrashCollector.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
             builder.Entity<IdentityRole>()
                 .HasData(
                     new IdentityRole
@@ -25,19 +25,7 @@ namespace TrashCollector.Data
                         Name = "Admin",
                         NormalizedName = "ADMIN"
                     }
-                    );
-            builder.Entity<IdentityRole>()
-                .HasData(new IdentityRole
-                {
-                    Name = "Customer",
-                    NormalizedName = "CUSTOMER"
-                });
-
-
+                );
         }
-
-        public DbSet<TrashCollector.Models.Sample> Sample { get; set; }
-
-        public DbSet<TrashCollector.Models.Customer> Customer { get; set; }
     }
 }
