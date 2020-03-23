@@ -37,7 +37,7 @@ namespace TrashCollector.ActionFilters
                 }
                 else if (_claimsPrincipal.IsInRole("Admin")) 
                 {
-                    context.Result = new RedirectToActionResult("Index", "Sample", null);
+                    context.Result = new RedirectToActionResult("Create", "Sample", null);
                 }
             }
         }

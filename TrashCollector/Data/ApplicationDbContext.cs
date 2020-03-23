@@ -32,8 +32,12 @@ namespace TrashCollector.Data
                     Name = "Customer",
                     NormalizedName = "CUSTOMER"
                 });
+
+
         }
 
         public DbSet<TrashCollector.Models.Sample> Sample { get; set; }
+
+        public DbSet<TrashCollector.Models.Customer> Customer { get; set; }
     }
 }

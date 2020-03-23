@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TrashCollector.Data;
 
 namespace TrashCollector.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200323130701_EditedCustomerMoldel")]
+    partial class EditedCustomerMoldel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,15 +50,15 @@ namespace TrashCollector.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "5e9b87c8-6a9d-435f-951b-c974bc5ef34f",
-                            ConcurrencyStamp = "494b2b40-0884-42f7-a7bd-8bd71ea5748f",
+                            Id = "2e98de86-69f3-4e21-bb4a-b5b57ec1a619",
+                            ConcurrencyStamp = "69dfdedd-565e-4511-9368-1d7f110f6304",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "c76277e8-2ff7-4e71-93b4-1089ec6a2b46",
-                            ConcurrencyStamp = "1d5ea192-37f4-4aae-b87c-4e8967933cd1",
+                            Id = "1cff7747-6908-4ac3-8c44-597c4f1fb4a8",
+                            ConcurrencyStamp = "49cf5a5c-f931-4dde-aca6-094460e69e39",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -231,44 +233,6 @@ namespace TrashCollector.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("TrashCollector.Models.Customer", b =>
-                {
-                    b.Property<int>("PrimaryKey")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<double>("AmountOwed")
-                        .HasColumnType("float");
-
-                    b.Property<DateTime>("EndOfCycle")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("ExtraPickUpUsed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IdentityUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("PickUpDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("StartOfCycle")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("PrimaryKey");
-
-                    b.HasIndex("IdentityUserId");
-
-                    b.ToTable("Customer");
-                });
-
             modelBuilder.Entity("TrashCollector.Models.Sample", b =>
                 {
                     b.Property<int>("PrimaryKey")
@@ -277,9 +241,6 @@ namespace TrashCollector.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("PrimaryKey");
@@ -336,13 +297,6 @@ namespace TrashCollector.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("TrashCollector.Models.Customer", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
-                        .WithMany()
-                        .HasForeignKey("IdentityUserId");
                 });
 #pragma warning restore 612, 618
         }

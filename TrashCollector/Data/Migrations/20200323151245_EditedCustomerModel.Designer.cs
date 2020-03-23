@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TrashCollector.Data;
 
 namespace TrashCollector.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200323151245_EditedCustomerModel")]
+    partial class EditedCustomerModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,15 +50,15 @@ namespace TrashCollector.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "5e9b87c8-6a9d-435f-951b-c974bc5ef34f",
-                            ConcurrencyStamp = "494b2b40-0884-42f7-a7bd-8bd71ea5748f",
+                            Id = "a73ed8f3-e206-4adf-a384-594442c8c91d",
+                            ConcurrencyStamp = "18925dff-312b-460f-af02-cc6a2d86b2ac",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "c76277e8-2ff7-4e71-93b4-1089ec6a2b46",
-                            ConcurrencyStamp = "1d5ea192-37f4-4aae-b87c-4e8967933cd1",
+                            Id = "ae996c6a-fb21-46fc-9dde-911510c70f3a",
+                            ConcurrencyStamp = "3d5482b9-7b64-4ff9-9030-97424c6de2a6",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -238,15 +240,6 @@ namespace TrashCollector.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<double>("AmountOwed")
-                        .HasColumnType("float");
-
-                    b.Property<DateTime>("EndOfCycle")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("ExtraPickUpUsed")
-                        .HasColumnType("bit");
-
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
@@ -255,12 +248,6 @@ namespace TrashCollector.Data.Migrations
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("PickUpDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("StartOfCycle")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("PrimaryKey");
 

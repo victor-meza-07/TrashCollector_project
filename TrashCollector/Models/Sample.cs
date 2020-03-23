@@ -12,5 +12,6 @@ namespace TrashCollector.Models
         public int PrimaryKey { get; set; }
         
         public string Name { get; set; }
+        public string UserId { get; set; }
     }
 }
