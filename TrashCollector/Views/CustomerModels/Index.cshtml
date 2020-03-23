@@ -1,0 +1,78 @@
+﻿@model IEnumerable<TrashCollector.Models.CustomerModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LatName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PickUpDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExtraPickUpDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AmountOwed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartOfCycle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndOfCycle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdentityUser)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LatName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PickUpDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExtraPickUpDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AmountOwed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartOfCycle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndOfCycle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdentityUser.Id)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.PrimaryKey">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.PrimaryKey">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.PrimaryKey">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
