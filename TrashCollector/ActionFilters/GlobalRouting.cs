@@ -31,6 +31,10 @@ namespace TrashCollector.ActionFilters
                 {
                     context.Result = new RedirectToActionResult("Index", "CustomerModels", null);
                 }
+                else if (_claimsPrincipal.IsInRole("Employee"))
+                {
+                    context.Result = new RedirectToActionResult("Index", "EmployeeModels", null);
+                }
             }
         }
     }

@@ -35,8 +35,18 @@ namespace TrashCollector.Data
                         NormalizedName = "CUSTOMER"
                     }
                 );
+            builder.Entity<IdentityRole>()
+                .HasData(
+                    new IdentityRole
+                    {
+                        Name = "Employee",
+                        NormalizedName = "EMPLOYEE"
+                    }
+                );
         }
 
         public DbSet<TrashCollector.Models.CustomerModel> CustomerModel { get; set; }
+
+        public DbSet<TrashCollector.Models.EmployeeModel> EmployeeModel { get; set; }
     }
 }

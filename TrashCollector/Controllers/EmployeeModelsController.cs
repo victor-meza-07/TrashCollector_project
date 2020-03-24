@@ -11,23 +11,23 @@ using TrashCollector.Models;
 
 namespace TrashCollector.Controllers
 {
-    public class CustomerModelsController : Controller
+    public class EmployeeModelsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public CustomerModelsController(ApplicationDbContext context)
+        public EmployeeModelsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: CustomerModels
+        // GET: EmployeeModels
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.CustomerModel.Include(c => c.IdentityUser);
+            var applicationDbContext = _context.EmployeeModel.Include(e => e.IdentityUser);
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: CustomerModels/Details/5
+        // GET: EmployeeModels/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -35,46 +35,46 @@ namespace TrashCollector.Controllers
                 return NotFound();
             }
 
-            var customerModel = await _context.CustomerModel
-                .Include(c => c.IdentityUser)
+            var employeeModel = await _context.EmployeeModel
+                .Include(e => e.IdentityUser)
                 .FirstOrDefaultAsync(m => m.PrimaryKey == id);
-            if (customerModel == null)
+            if (employeeModel == null)
             {
                 return NotFound();
             }
 
-            return View(customerModel);
+            return View(employeeModel);
         }
 
-        // GET: CustomerModels/Create
+        // GET: EmployeeModels/Create
         public IActionResult Create()
         {
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
-        // POST: CustomerModels/Create
+        // POST: EmployeeModels/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PrimaryKey,FirstName,LatName,PickUpDate,ExtraPickUpDate,AmountOwed,StartOfCycle,EndOfCycle,Address,ZipCode,IdentityUserId")] CustomerModel customerModel)
+        public async Task<IActionResult> Create([Bind("PrimaryKey,IdentityUserId,FirstName,LastName,Address,ZipCode")] EmployeeModel employeeModel)
         {
             if (ModelState.IsValid)
             {
-                var userid = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                customerModel.IdentityUserId = userid;
-                _context.CustomerModel.Add(customerModel);
+                var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                employeeModel.IdentityUserId = userId;
+                _context.EmployeeModel.Add(employeeModel);
 
-                _context.Add(customerModel);
+                _context.Add(employeeModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customerModel.IdentityUserId);
-            return View(customerModel);
+            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", employeeModel.IdentityUserId);
+            return View(employeeModel);
         }
 
-        // GET: CustomerModels/Edit/5
+        // GET: EmployeeModels/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -82,23 +82,23 @@ namespace TrashCollector.Controllers
                 return NotFound();
             }
 
-            var customerModel = await _context.CustomerModel.FindAsync(id);
-            if (customerModel == null)
+            var employeeModel = await _context.EmployeeModel.FindAsync(id);
+            if (employeeModel == null)
             {
                 return NotFound();
             }
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customerModel.IdentityUserId);
-            return View(customerModel);
+            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", employeeModel.IdentityUserId);
+            return View(employeeModel);
         }
 
-        // POST: CustomerModels/Edit/5
+        // POST: EmployeeModels/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PrimaryKey,FirstName,LatName,PickUpDate,ExtraPickUpDate,AmountOwed,StartOfCycle,EndOfCycle,Address,ZipCode,IdentityUserId")] CustomerModel customerModel)
+        public async Task<IActionResult> Edit(int id, [Bind("PrimaryKey,IdentityUserId,FirstName,LastName,Address,ZipCode")] EmployeeModel employeeModel)
         {
-            if (id != customerModel.PrimaryKey)
+            if (id != employeeModel.PrimaryKey)
             {
                 return NotFound();
             }
@@ -107,12 +107,12 @@ namespace TrashCollector.Controllers
             {
                 try
                 {
-                    _context.Update(customerModel);
+                    _context.Update(employeeModel);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CustomerModelExists(customerModel.PrimaryKey))
+                    if (!EmployeeModelExists(employeeModel.PrimaryKey))
                     {
                         return NotFound();
                     }
@@ -123,11 +123,11 @@ namespace TrashCollector.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customerModel.IdentityUserId);
-            return View(customerModel);
+            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", employeeModel.IdentityUserId);
+            return View(employeeModel);
         }
 
-        // GET: CustomerModels/Delete/5
+        // GET: EmployeeModels/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -135,31 +135,31 @@ namespace TrashCollector.Controllers
                 return NotFound();
             }
 
-            var customerModel = await _context.CustomerModel
-                .Include(c => c.IdentityUser)
+            var employeeModel = await _context.EmployeeModel
+                .Include(e => e.IdentityUser)
                 .FirstOrDefaultAsync(m => m.PrimaryKey == id);
-            if (customerModel == null)
+            if (employeeModel == null)
             {
                 return NotFound();
             }
 
-            return View(customerModel);
+            return View(employeeModel);
         }
 
-        // POST: CustomerModels/Delete/5
+        // POST: EmployeeModels/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var customerModel = await _context.CustomerModel.FindAsync(id);
-            _context.CustomerModel.Remove(customerModel);
+            var employeeModel = await _context.EmployeeModel.FindAsync(id);
+            _context.EmployeeModel.Remove(employeeModel);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CustomerModelExists(int id)
+        private bool EmployeeModelExists(int id)
         {
-            return _context.CustomerModel.Any(e => e.PrimaryKey == id);
+            return _context.EmployeeModel.Any(e => e.PrimaryKey == id);
         }
     }
 }
