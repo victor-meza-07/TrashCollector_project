@@ -161,5 +161,34 @@ namespace TrashCollector.Controllers
         {
             return _context.EmployeeModel.Any(e => e.PrimaryKey == id);
         }
+
+
+        /*MY LOGIC*/
+
+        public IActionResult Default() 
+        {
+            //Get current User ID
+            //Get Current User Zip
+            //Get a list of all customers that fit that zip.
+
+            List<CustomerModel> CustomersInZip = new List<CustomerModel>();
+            
+            var currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var currentEmployee = _context.EmployeeModel.Where(c => c.IdentityUserId == currentUserId).FirstOrDefault();
+            if (currentEmployee != null)
+            {
+                var currentEmployeeZip = _context.EmployeeModel.Where(a => a.IdentityUserId == currentUserId).Select(a => a.ZipCode).FirstOrDefault();
+                //Getemployees zip
+                var listOfCustomers = _context.CustomerModel.Where(c => c.ZipCode == currentEmployeeZip);
+                var todaysDate = DateTime.Today.ToString();
+                var customersForTheDay = listOfCustomers.Where(c => c.PickUpDate == todaysDate);
+                return View(customersForTheDay);
+            }
+            else 
+            {
+                return RedirectToAction("Index", "EmployeeModels");
+            }
+            
+        }
     }
 }

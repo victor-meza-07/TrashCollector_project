@@ -25,15 +25,22 @@ namespace TrashCollector.ActionFilters
         public void OnActionExecuting(ActionExecutingContext context)
         {
             var controller = context.RouteData.Values["controller"];
-            if (controller.Equals("Home")) 
+            if (controller.Equals("Home"))
             {
-                if (_claimsPrincipal.IsInRole("Customer")) 
+                if (_claimsPrincipal.IsInRole("Customer"))
                 {
                     context.Result = new RedirectToActionResult("Index", "CustomerModels", null);
                 }
                 else if (_claimsPrincipal.IsInRole("Employee"))
                 {
                     context.Result = new RedirectToActionResult("Index", "EmployeeModels", null);
+                }
+            }
+            else if (controller.Equals("EmployeeModels")) 
+            {
+                if (_claimsPrincipal.IsInRole("Employee")) 
+                {
+                    context.Result = new RedirectToActionResult("Default", "EmployeeModels", null);
                 }
             }
         }
