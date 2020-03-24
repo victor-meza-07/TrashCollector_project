@@ -13,6 +13,7 @@ namespace TrashCollector
     {
         public static void Main(string[] args)
         {
+            var date = DateTime.Today.ToString();
             CreateHostBuilder(args).Build().Run();
         }
 

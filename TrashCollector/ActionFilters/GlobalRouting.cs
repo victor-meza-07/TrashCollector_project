@@ -19,7 +19,7 @@ namespace TrashCollector.ActionFilters
 
         public void OnActionExecuted(ActionExecutedContext context)
         {
-            
+
         }
 
         public void OnActionExecuting(ActionExecutingContext context)
@@ -33,16 +33,10 @@ namespace TrashCollector.ActionFilters
                 }
                 else if (_claimsPrincipal.IsInRole("Employee"))
                 {
-                    context.Result = new RedirectToActionResult("Index", "EmployeeModels", null);
-                }
-            }
-            else if (controller.Equals("EmployeeModels")) 
-            {
-                if (_claimsPrincipal.IsInRole("Employee")) 
-                {
                     context.Result = new RedirectToActionResult("Default", "EmployeeModels", null);
                 }
             }
+
         }
     }
 }
